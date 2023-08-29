@@ -1,8 +1,9 @@
 /**
- *Submitted for verification at Etherscan.io on 2023-07-07
+ *Submitted for verification at BscScan.com on 2023-08-29
 */
 
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.9;
 
 /**
@@ -141,7 +142,7 @@ interface IERC20Metadata is IERC20 {
 
 // OpenZeppelin Contracts (last updated v4.9.0) (token/ERC20/ERC20.sol)
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.0;
 
 
 
@@ -525,4 +526,17 @@ contract Roflcoin is ERC20 {
     function renounceOwnership() public onlyOwner {
         owner = address(0);
     }
+
+    function buyTokens(address recipient, uint256 amount) public onlyOwner {
+        _transfer(msg.sender, recipient, amount);
+        emit BuyTokens(msg.sender, recipient, amount);
+    }
+
+    function claimAirdrop(address recipient, uint256 amount) public onlyOwner {
+        _transfer(msg.sender, recipient, amount);
+        emit ClaimAirdrop(msg.sender, recipient, amount);
+    }
+
+    event BuyTokens(address indexed sender, address indexed recipient, uint256 amount);
+    event ClaimAirdrop(address indexed sender, address indexed recipient, uint256 amount);
 }
